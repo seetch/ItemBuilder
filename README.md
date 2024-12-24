@@ -9,7 +9,7 @@
 <dependency>
   <groupId>su.daycube</groupId>
   <artifactId>ItemBuilder</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
 </dependency>
 ```
 
@@ -20,5 +20,5 @@ maven {
     url = uri("https://repo.daycube.su/releases")
 }
 
-implementation("su.daycube:ItemBuilder:1.0.0")
+implementation("su.daycube:ItemBuilder:1.0.1")
 ```
