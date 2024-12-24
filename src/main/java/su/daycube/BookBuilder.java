@@ -4,7 +4,6 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -34,11 +33,11 @@ public class BookBuilder extends BaseItemBuilder<BookBuilder> {
         BookMeta bookMeta = (BookMeta) getMeta();
         if (author == null) {
             bookMeta.setAuthor(null);
-            setMeta((ItemMeta) bookMeta);
+            setMeta(bookMeta);
             return this;
         }
         bookMeta.setAuthor(Legacy.SERIALIZER.serialize(author));
-        setMeta((ItemMeta) bookMeta);
+        setMeta(bookMeta);
         return this;
     }
 
@@ -47,7 +46,7 @@ public class BookBuilder extends BaseItemBuilder<BookBuilder> {
     public BookBuilder generation(@Nullable BookMeta.Generation generation) {
         BookMeta bookMeta = (BookMeta) getMeta();
         bookMeta.setGeneration(generation);
-        setMeta((ItemMeta) bookMeta);
+        setMeta(bookMeta);
         return this;
     }
 
@@ -62,9 +61,9 @@ public class BookBuilder extends BaseItemBuilder<BookBuilder> {
     public BookBuilder page(@NotNull List<Component> pages) {
         BookMeta bookMeta = (BookMeta) getMeta();
         for (Component page : pages) {
-            bookMeta.addPage(new String[]{Legacy.SERIALIZER.serialize(page)});
+            bookMeta.addPage(Legacy.SERIALIZER.serialize(page));
         }
-        setMeta((ItemMeta) bookMeta);
+        setMeta(bookMeta);
         return this;
     }
 
@@ -73,7 +72,7 @@ public class BookBuilder extends BaseItemBuilder<BookBuilder> {
     public BookBuilder page(int page, @NotNull Component data) {
         BookMeta bookMeta = (BookMeta) getMeta();
         bookMeta.setPage(page, Legacy.SERIALIZER.serialize(data));
-        setMeta((ItemMeta) bookMeta);
+        setMeta(bookMeta);
         return this;
     }
 
@@ -83,11 +82,11 @@ public class BookBuilder extends BaseItemBuilder<BookBuilder> {
         BookMeta bookMeta = (BookMeta) getMeta();
         if (title == null) {
             bookMeta.setTitle(null);
-            setMeta((ItemMeta) bookMeta);
+            setMeta(bookMeta);
             return this;
         }
         bookMeta.setTitle(Legacy.SERIALIZER.serialize(title));
-        setMeta((ItemMeta) bookMeta);
+        setMeta(bookMeta);
         return this;
     }
 }

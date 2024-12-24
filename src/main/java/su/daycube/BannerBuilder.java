@@ -7,7 +7,6 @@ import org.bukkit.block.banner.Pattern;
 import org.bukkit.block.banner.PatternType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BannerMeta;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -40,7 +39,7 @@ public final class BannerBuilder extends BaseItemBuilder<BannerBuilder> {
     public BannerBuilder baseColor(@NotNull DyeColor color) {
         BannerMeta bannerMeta = (BannerMeta) getMeta();
         bannerMeta.setBaseColor(color);
-        setMeta((ItemMeta) bannerMeta);
+        setMeta(bannerMeta);
         return this;
     }
 
@@ -49,7 +48,7 @@ public final class BannerBuilder extends BaseItemBuilder<BannerBuilder> {
     public BannerBuilder pattern(@NotNull DyeColor color, @NotNull PatternType pattern) {
         BannerMeta bannerMeta = (BannerMeta) getMeta();
         bannerMeta.addPattern(new Pattern(color, pattern));
-        setMeta((ItemMeta) bannerMeta);
+        setMeta(bannerMeta);
         return this;
     }
 
@@ -65,7 +64,7 @@ public final class BannerBuilder extends BaseItemBuilder<BannerBuilder> {
         BannerMeta bannerMeta = (BannerMeta) getMeta();
         for (Pattern it : patterns)
             bannerMeta.addPattern(it);
-        setMeta((ItemMeta) bannerMeta);
+        setMeta(bannerMeta);
         return this;
     }
 
@@ -80,7 +79,7 @@ public final class BannerBuilder extends BaseItemBuilder<BannerBuilder> {
     public BannerBuilder pattern(int index, @NotNull Pattern pattern) {
         BannerMeta bannerMeta = (BannerMeta) getMeta();
         bannerMeta.setPattern(index, pattern);
-        setMeta((ItemMeta) bannerMeta);
+        setMeta(bannerMeta);
         return this;
     }
 
@@ -89,7 +88,7 @@ public final class BannerBuilder extends BaseItemBuilder<BannerBuilder> {
     public BannerBuilder setPatterns(@NotNull List<Pattern> patterns) {
         BannerMeta bannerMeta = (BannerMeta) getMeta();
         bannerMeta.setPatterns(patterns);
-        setMeta((ItemMeta) bannerMeta);
+        setMeta(bannerMeta);
         return this;
     }
 }

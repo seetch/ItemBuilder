@@ -3,7 +3,6 @@ package su.daycube;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.profile.PlayerProfile;
 import org.bukkit.profile.PlayerTextures;
@@ -65,8 +64,8 @@ public final class SkullBuilder extends BaseItemBuilder<SkullBuilder> {
             return this;
         }
         playerProfile.setTextures(textures);
-        skullMeta.setOwnerProfile((PlayerProfile) playerProfile);
-        setMeta((ItemMeta) skullMeta);
+        skullMeta.setOwnerProfile(playerProfile);
+        setMeta(skullMeta);
         return this;
     }
 
@@ -83,7 +82,7 @@ public final class SkullBuilder extends BaseItemBuilder<SkullBuilder> {
             return this;
         SkullMeta skullMeta = (SkullMeta) getMeta();
         skullMeta.setOwningPlayer(player);
-        setMeta((ItemMeta) skullMeta);
+        setMeta(skullMeta);
         return this;
     }
 }

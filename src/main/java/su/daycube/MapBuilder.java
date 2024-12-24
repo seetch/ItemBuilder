@@ -3,7 +3,6 @@ package su.daycube;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.MapMeta;
 import org.bukkit.map.MapView;
 import org.jetbrains.annotations.Contract;
@@ -33,7 +32,7 @@ public class MapBuilder extends BaseItemBuilder<MapBuilder> {
     public MapBuilder color(@Nullable Color color) {
         MapMeta mapMeta = (MapMeta) getMeta();
         mapMeta.setColor(color);
-        setMeta((ItemMeta) mapMeta);
+        setMeta(mapMeta);
         return this;
     }
 
@@ -42,7 +41,7 @@ public class MapBuilder extends BaseItemBuilder<MapBuilder> {
     public MapBuilder locationName(@Nullable String name) {
         MapMeta mapMeta = (MapMeta) getMeta();
         mapMeta.setLocationName(name);
-        setMeta((ItemMeta) mapMeta);
+        setMeta(mapMeta);
         return this;
     }
 
@@ -51,7 +50,7 @@ public class MapBuilder extends BaseItemBuilder<MapBuilder> {
     public MapBuilder scaling(boolean scaling) {
         MapMeta mapMeta = (MapMeta) getMeta();
         mapMeta.setScaling(scaling);
-        setMeta((ItemMeta) mapMeta);
+        setMeta(mapMeta);
         return this;
     }
 
@@ -60,7 +59,7 @@ public class MapBuilder extends BaseItemBuilder<MapBuilder> {
     public MapBuilder view(@NotNull MapView view) {
         MapMeta mapMeta = (MapMeta) getMeta();
         mapMeta.setMapView(view);
-        setMeta((ItemMeta) mapMeta);
+        setMeta(mapMeta);
         return this;
     }
 }

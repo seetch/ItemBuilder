@@ -15,8 +15,8 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import su.daycube.impl.VersionHelper;
-import su.daycube.impl.nbt.ItemNbt;
+import su.daycube.impl.NMS;
+import su.daycube.impl.pdc.PdcBuilder;
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -37,12 +37,12 @@ public abstract class BaseItemBuilder<B extends BaseItemBuilder<B>> {
 
     static {
         try {
-            Class<?> metaClass = VersionHelper.craftClass("inventory.CraftMetaItem");
+            Class<?> metaClass = NMS.getCraftClass("inventory.CraftMetaItem");
             DISPLAY_NAME_FIELD = metaClass.getDeclaredField("displayName");
             DISPLAY_NAME_FIELD.setAccessible(true);
             LORE_FIELD = metaClass.getDeclaredField("lore");
             LORE_FIELD.setAccessible(true);
-        } catch (NoSuchFieldException | ClassNotFoundException exception) {
+        } catch (NoSuchFieldException exception) {
             exception.printStackTrace();
             try {
                 throw new Exception("Could not retrieve displayName nor lore field for ItemBuilder.");
@@ -90,7 +90,7 @@ public abstract class BaseItemBuilder<B extends BaseItemBuilder<B>> {
         if (this.meta == null)
             return (B) this;
         Objects.requireNonNull(GSON);
-        List<String> jsonLore = (List<String>) lore.stream().filter(Objects::nonNull).map(GSON::serialize).collect(Collectors.toList());
+        List<String> jsonLore = lore.stream().filter(Objects::nonNull).map(GSON::serialize).collect(Collectors.toList());
         try {
             LORE_FIELD.set(this.meta, jsonLore);
         } catch (IllegalAccessException exception) {
@@ -108,7 +108,7 @@ public abstract class BaseItemBuilder<B extends BaseItemBuilder<B>> {
         try {
             List<String> jsonLore = (List<String>) LORE_FIELD.get(this.meta);
             Objects.requireNonNull(GSON);
-            components = (jsonLore == null) ? new ArrayList<>() : (List<Component>) jsonLore.stream().map(GSON::deserialize).collect(Collectors.toList());
+            components = (jsonLore == null) ? new ArrayList<>() : jsonLore.stream().map(GSON::deserialize).collect(Collectors.toList());
         } catch (IllegalAccessException exception) {
             components = new ArrayList<>();
             exception.printStackTrace();
@@ -187,7 +187,7 @@ public abstract class BaseItemBuilder<B extends BaseItemBuilder<B>> {
     public B glow(boolean glow) {
         if (glow) {
             this.meta.addEnchant(Enchantment.LURE, 1, false);
-            this.meta.addItemFlags(new ItemFlag[]{ItemFlag.HIDE_ENCHANTS});
+            this.meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             return (B) this;
         }
         for (Enchantment enchantment : this.meta.getEnchants().keySet())
@@ -222,27 +222,27 @@ public abstract class BaseItemBuilder<B extends BaseItemBuilder<B>> {
 
     @NotNull
     @Contract("_, _ -> this")
-    public B setNbt(@NotNull String key, @NotNull String value) {
+    public B setPdc(@NotNull String key, @NotNull String value) {
         this.itemStack.setItemMeta(this.meta);
-        this.itemStack = ItemNbt.setString(this.itemStack, key, value);
+        this.itemStack = PdcBuilder.from(this.itemStack).setString(key, value).build();
         this.meta = this.itemStack.getItemMeta();
         return (B) this;
     }
 
     @NotNull
     @Contract("_, _ -> this")
-    public B setNbt(@NotNull String key, boolean value) {
+    public B setPdc(@NotNull String key, boolean value) {
         this.itemStack.setItemMeta(this.meta);
-        this.itemStack = ItemNbt.setBoolean(this.itemStack, key, value);
+        this.itemStack = PdcBuilder.from(this.itemStack).setBoolean(key, value).build();
         this.meta = this.itemStack.getItemMeta();
         return (B) this;
     }
 
     @NotNull
     @Contract("_ -> this")
-    public B removeNbt(@NotNull String key) {
+    public B removePdc(@NotNull String key) {
         this.itemStack.setItemMeta(this.meta);
-        this.itemStack = ItemNbt.removeTag(this.itemStack, key);
+        this.itemStack = PdcBuilder.from(this.itemStack).remove(key).build();
         this.meta = this.itemStack.getItemMeta();
         return (B) this;
     }

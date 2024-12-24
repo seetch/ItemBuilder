@@ -5,7 +5,6 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkEffectMeta;
 import org.bukkit.inventory.meta.FireworkMeta;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -42,12 +41,12 @@ public class FireworkBuilder extends BaseItemBuilder<FireworkBuilder> {
         if (getItemStack().getType() == STAR) {
             FireworkEffectMeta effectMeta = (FireworkEffectMeta) getMeta();
             effectMeta.setEffect(effects.get(0));
-            setMeta((ItemMeta) effectMeta);
+            setMeta(effectMeta);
             return this;
         }
         FireworkMeta fireworkMeta = (FireworkMeta) getMeta();
         fireworkMeta.addEffects(effects);
-        setMeta((ItemMeta) fireworkMeta);
+        setMeta(fireworkMeta);
         return this;
     }
 
@@ -57,7 +56,7 @@ public class FireworkBuilder extends BaseItemBuilder<FireworkBuilder> {
         if (getItemStack().getType() == ROCKET) {
             FireworkMeta fireworkMeta = (FireworkMeta) getMeta();
             fireworkMeta.setPower(power);
-            setMeta((ItemMeta) fireworkMeta);
+            setMeta(fireworkMeta);
         }
         return this;
     }

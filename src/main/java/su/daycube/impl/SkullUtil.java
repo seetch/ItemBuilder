@@ -29,7 +29,7 @@ public final class SkullUtil {
 
     public static String getSkinUrl(String base64Texture) {
         String decoded = new String(Base64.getDecoder().decode(base64Texture));
-        JsonObject object = (JsonObject) GSON.fromJson(decoded, JsonObject.class);
+        JsonObject object = GSON.fromJson(decoded, JsonObject.class);
         JsonElement textures = object.get("textures");
         if (textures == null)
             return null;
