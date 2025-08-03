@@ -53,8 +53,8 @@
 
     <distributionManagement>
         <repository>
-            <id>repo.daycube.su</id>
-            <url>https://repo.daycube.su/releases</url>
+            <id>deban.ru</id>
+            <url>https://deban.ru/releases</url>
         </repository>
     </distributionManagement>
     

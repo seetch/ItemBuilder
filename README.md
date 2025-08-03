@@ -1,9 +1,12 @@
+# ItemBuilder
+Create items without messing your hands.
+
 ## Maven
 
 ```xml
 <repository>
-  <id>daycube-repo</id>
-  <url>https://repo.daycube.su/releases</url>
+  <id>deban</id>
+  <url>https://deban.ru/releases</url>
 </repository>
 
 <dependency>
@@ -13,11 +16,12 @@
 </dependency>
 ```
 
-## Gradle 
+## Gradle Groovy
 
 ```xml
 maven {
-    url = uri("https://repo.daycube.su/releases")
+    name "deban"
+    url "https://deban.ru/releases"
 }
 
 implementation("su.daycube:ItemBuilder:1.0.1")
